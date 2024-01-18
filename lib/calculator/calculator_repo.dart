@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:dart_learn/common.dart';
+
 abstract class ICalculator {
   void sum();
   void sub();
@@ -49,6 +51,8 @@ class Calculator extends ICalculator {
   }
 }
 
+String msg =
+    "press y for calculator menu, press n for exit, press m for main menu";
 void calc() {
   print("Enter first number");
   int x = int.parse(stdin.readLineSync()!);
@@ -60,25 +64,17 @@ void calc() {
   switch (op) {
     case '+':
       calculator.sum();
-      more();
+      more(calc, msg);
     case '-':
       calculator.sub();
-      more();
+      more(calc, msg);
     case '*':
       calculator.mul();
-      more();
+      more(calc, msg);
     case '/':
       calculator.div();
-      more();
+      more(calc, msg);
     default:
       exit(0);
-  }
-}
-
-void more() {
-  print("continue... press y/yes, for stop press any key");
-  String value = stdin.readLineSync()!;
-  if (value == "y") {
-    return calc();
   }
 }

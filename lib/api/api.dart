@@ -2,12 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_learn/api/api_repo.dart';
+import 'package:dart_learn/common.dart';
+
+String msg = "press y for api menu, press n for exit, press m for main menu";
 
 class Api {
   late ApiRepoImp apiImp;
   Api() {
     apiImp = ApiRepoImp();
-    action();
   }
 
   action() async {
@@ -19,40 +21,24 @@ class Api {
     int input = int.parse(stdin.readLineSync()!);
     switch (input) {
       case 1:
-        print('1');
         await apiImp.getTodos();
-        more();
+        more(action, msg);
       case 2:
         int id = int.parse(inputMessage('Enter record id'));
         await apiImp.getTodoById(id);
-        more();
+        more(action, msg);
       case 3:
-        int body =
+        Map<String, dynamic> body =
             json.decode(inputMessage('Enter record in json fromat for save'));
         await apiImp.addTodo(body);
-        more();
+        more(action, msg);
       case 4:
         int id =
             int.parse(inputMessage("Enter record id which you want to delete"));
         await apiImp.deleteTodo(id);
-        more();
+        more(action, msg);
       default:
         exit(0);
     }
-  }
-
-  more() {
-    print("continue press y, stop press n...");
-    String more = stdin.readLineSync()!;
-    if (more == 'y' || more == 'Y' || more == 'Yes' || more == 'yes') {
-      action();
-    } else {
-      exit(0);
-    }
-  }
-
-  String inputMessage(String msg) {
-    print(msg);
-    return stdin.readLineSync()!;
   }
 }

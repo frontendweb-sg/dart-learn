@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dart_learn/api/todo.dart';
 import 'package:http/http.dart' as http;
 
 abstract class _ApiRepo<T> {
@@ -17,12 +16,13 @@ class ApiRepoImp<T> implements _ApiRepo<T> {
   ApiRepoImp([String httpurl = 'http://localhost:3001/posts']) : _url = httpurl;
 
   @override
-  Future<T> addTodo(T todo) async {
+  Future<T> addTodo(T body) async {
     try {
+      print('todo $body');
       final response = await http.post(
         Uri.parse(_url),
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode(todo),
+        body: jsonEncode(body),
       );
       T data = json.decode(response.body);
       print('DATA SAVED SUCCESSFULLY');
@@ -56,6 +56,7 @@ class ApiRepoImp<T> implements _ApiRepo<T> {
       print('$_url/$id');
       final response = await http.get(Uri.parse('$_url/$id'));
       final T data = json.decode(response.body);
+      print('data $data');
       print(_toJson(data));
       return data;
     } on HttpException catch (error) {
