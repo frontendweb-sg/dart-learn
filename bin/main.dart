@@ -14,14 +14,17 @@ void main(List<String> arguments) async {
 
   // globalAction();
 
-  final stack = Stack();
-  print(stack.isEmpty);
-  print(stack.length);
-  stack.push('hello');
-  stack.push('world');
-  stack.push('pradeep');
-  print(stack);
-  print(stack.peak());
-  stack.pop();
-  print(stack);
+  // final stack = Stack();
+  // print(stack.isEmpty);
+  // print(stack.length);
+  // stack.push('hello');
+  // stack.push('world');
+  // stack.push('pradeep');
+  // print(stack);
+  // print(stack.peak());
+  // stack.pop();
+  // print(stack);
+
+  String? x;
+  print(x);
 }
